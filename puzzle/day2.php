@@ -28,7 +28,7 @@ class day2 extends DayInALife
     {
         $goodPassword = 0;
 
-        foreach ($this->fileAsArray as $line) {
+        foreach ($this->lines as $line) {
             $rules = $this->splitInputString($line);
             $count = $this->countOccurrence($rules->character, $rules->password);
 
@@ -53,7 +53,7 @@ class day2 extends DayInALife
     {
         $goodPassword = 0;
 
-        foreach ($this->fileAsArray as $line) {
+        foreach ($this->lines as $line) {
             $rules = $this->splitInputString($line);
             if ($this->verifyOccurrence($rules->minOccurrence, $rules->maxOccurrence, $rules->character, $rules->password)) {
                 $goodPassword++;

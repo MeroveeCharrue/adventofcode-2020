@@ -4,8 +4,8 @@ class day1 extends DayInALife
 {
     public function getResultPartOne()
     {
-        foreach ($this->fileAsArray as $i) {
-            foreach ($this->fileAsArray as $j) {
+        foreach ($this->lines as $i) {
+            foreach ($this->lines as $j) {
                 if (($i + $j) === 2020) {
                     return $i * $j;
                 }
@@ -15,9 +15,9 @@ class day1 extends DayInALife
 
     public function getResultPartTwo()
     {
-        foreach ($this->fileAsArray as $i) {
-            foreach ($this->fileAsArray as $j) {
-                foreach ($this->fileAsArray as $k) {
+        foreach ($this->lines as $i) {
+            foreach ($this->lines as $j) {
+                foreach ($this->lines as $k) {
                     if (($i + $j + $k) === 2020) {
                         return $i * $j * $k;
                     }

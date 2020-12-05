@@ -4,18 +4,18 @@ abstract class DayInALife
 {
     protected $fileContent;
 
-    protected $fileAsArray;
+    protected $lines;
 
-    protected $arrayLength;
+    protected $linesCount;
 
     public function __construct(string $filename) {
         $this->fileContent = file_get_contents('puzzle/input/'.$filename);
 
-        $this->fileAsArray = explode(PHP_EOL, $this->fileContent);
+        $this->lines = explode(PHP_EOL, $this->fileContent);
         // remove last empty newline.
-        array_pop($this->fileAsArray);
+        array_pop($this->lines);
 
-        $this->arrayLength = count($this->fileAsArray);
+        $this->linesCount = count($this->lines);
     }
 
     abstract public function getResultPartOne();
