@@ -2,10 +2,19 @@
 
 abstract class DayInALife
 {
+    /**
+     * @var string
+     */
     protected $fileContent;
 
+    /**
+     * @var string[]
+     */
     protected $lines;
 
+    /**
+     * @var int
+     */
     protected $linesCount;
 
     public function __construct(string $filename) {
