@@ -33,31 +33,59 @@ class day8 extends DayInALife
         // TODO: Implement getResultPartTwo() method.
     }
 
-    private function processOperation()
+    private function processOperation(): bool
     {
-        $this->placeVisited[] = $this->head;
-        $operationLine = $this->lines[$this->head];
+        $this->markThisOperationLineAsVisited();
 
-        $operation = explode(' ', $operationLine);
-        switch ($operation[0]) {
+        $operation = $this->getCurrentOperation();
+
+        switch ($operation->operand) {
             case 'acc':
-                $this->acc($operation[1]);
+                $this->acc($operation->value);
                 break;
             case 'jmp':
-                $this->jmp($operation[1]);
+                $this->jmp($operation->value);
                 break;
             case 'nop':
                 $this->nop();
                 break;
         }
 
-        if (in_array($this->head, $this->placeVisited)) {
-            return;
+        if ($this->isEnteringInfiniteLoop()) {
+            return false;
         }
 
-        if ($this->head < count($this->lines)) {
+        if (!$this->hasReachedEndOfFile()) {
             $this->processOperation();
         }
+
+        return true;
+    }
+
+    private function getCurrentOperation(): stdClass
+    {
+        $operationLine = $this->lines[$this->head];
+        $operation = explode(' ', $operationLine);
+
+        return (object) [
+            'operand' => $operation[0],
+            'value' => $operation[1]
+        ];
+    }
+
+    private function markThisOperationLineAsVisited(): void
+    {
+        $this->placeVisited[] = $this->head;
+    }
+
+    private function isEnteringInfiniteLoop(): bool
+    {
+        return in_array($this->head, $this->placeVisited);
+    }
+
+    private function hasReachedEndOfFile(): bool
+    {
+        return $this->head >= count($this->lines);
     }
 
     private function acc($value): void
